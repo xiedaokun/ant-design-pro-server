@@ -1,0 +1,18 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  // 启用 CORS，允许前端访问
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
+
+  const port = process.env.PORT ?? 3001;
+  await app.listen(port);
+  console.log(`🚀 Server is running on: http://localhost:${port}`);
+}
+
+void bootstrap();
