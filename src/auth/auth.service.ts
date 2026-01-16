@@ -4,6 +4,7 @@
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { LoginDto, LoginResponseDto } from './dto/login.dto';
@@ -13,12 +14,13 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   /**
    * 用户登录
    * @param loginDto 登录参数（用户名、密码、登录类型）
-   * @returns 登录结果（状态、权限等）
+   * @returns 登录结果（状态、权限、Token）
    */
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
     const { username, password, type } = loginDto;
@@ -28,12 +30,20 @@ export class AuthService {
       where: { username, password, isActive: true },
     });
 
-    // 登录成功
+    // 登录成功，生成 JWT Token
     if (user) {
+      const payload = {
+        sub: user.id,
+        username: user.username,
+        authority: user.authority,
+      };
+      const token = this.jwtService.sign(payload);
+
       return {
         status: 'ok',
         type: type || 'account',
         currentAuthority: user.authority,
+        token,
       };
     }
 

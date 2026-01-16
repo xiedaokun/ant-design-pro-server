@@ -23,4 +23,7 @@ export class LoginResponseDto {
 
   @ApiProperty({ description: '当前权限', example: 'admin' })
   currentAuthority: string;
+
+  @ApiPropertyOptional({ description: 'JWT Token' })
+  token?: string;
 }

@@ -4,6 +4,7 @@
  */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RuleModule } from './rule/rule.module';
@@ -16,6 +17,12 @@ import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
+    // ============ 环境变量配置 ============
+    ConfigModule.forRoot({
+      isGlobal: true, // 全局可用
+      envFilePath: '.env', // 环境变量文件路径
+    }),
+
     // ============ 本地 MySQL 配置（已注释） ============
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
