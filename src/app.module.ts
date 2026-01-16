@@ -1,3 +1,7 @@
+/**
+ * 应用程序根模块
+ * 配置数据库连接和导入所有功能模块
+ */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -12,6 +16,7 @@ import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
+    // ============ 本地 MySQL 配置（已注释） ============
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
     //   host: 'localhost',
@@ -20,9 +25,10 @@ import { ActivityModule } from './activity/activity.module';
     //   password: '123456',
     //   database: 'ant_design_pro',
     //   autoLoadEntities: true,
-    //   synchronize: false, // 生产环境设为 false
+    //   synchronize: false,
     // }),
 
+    // ============ TiDB Cloud 云数据库配置 ============
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
@@ -34,16 +40,18 @@ import { ActivityModule } from './activity/activity.module';
         minVersion: 'TLSv1.2',
         rejectUnauthorized: true,
       },
-      autoLoadEntities: true,
-      synchronize: true, // 自动同步表结构到 TiDB Cloud
+      autoLoadEntities: true, // 自动加载实体
+      synchronize: true, // 自动同步表结构（生产环境应设为 false）
     }),
-    RuleModule,
-    AuthModule,
-    UserModule,
-    AnalysisModule,
-    TagsModule,
-    ProjectModule,
-    ActivityModule,
+
+    // ============ 功能模块 ============
+    RuleModule, // 规则管理模块
+    AuthModule, // 认证模块（登录/登出）
+    UserModule, // 用户管理模块
+    AnalysisModule, // 数据分析图表模块
+    TagsModule, // 标签管理模块
+    ProjectModule, // 项目管理模块
+    ActivityModule, // 活动动态模块
   ],
   controllers: [AppController],
   providers: [AppService],

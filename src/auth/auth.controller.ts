@@ -1,3 +1,7 @@
+/**
+ * 认证控制器
+ * 提供登录、登出接口
+ */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -8,6 +12,10 @@ import { LoginDto, LoginResponseDto } from './dto/login.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * 账号密码登录
+   * POST /api/login/account
+   */
   @Post('account')
   @ApiOperation({
     summary: '账号密码登录',
@@ -18,6 +26,10 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  /**
+   * 退出登录
+   * POST /api/login/outLogin
+   */
   @Post('outLogin')
   @ApiOperation({ summary: '退出登录', description: '退出当前登录状态' })
   logout() {

@@ -1,3 +1,7 @@
+/**
+ * 数据分析服务
+ * 提供图表展示所需的模拟数据
+ */
 import { Injectable } from '@nestjs/common';
 import {
   AnalysisChartResponseDto,
@@ -9,6 +13,10 @@ import {
 
 @Injectable()
 export class AnalysisService {
+  /**
+   * 获取分析页图表数据
+   * @returns 图表数据（访问量、销售额、搜索关键词等）
+   */
   getChartData(): AnalysisChartResponseDto {
     return {
       data: {

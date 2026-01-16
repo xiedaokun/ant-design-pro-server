@@ -1,8 +1,13 @@
+/**
+ * 标签服务
+ * 提供城市标签数据（用于标签云展示）
+ */
 import { Injectable } from '@nestjs/common';
 import { TagsResponseDto, TagItemDto } from './dto/tags.dto';
 
 @Injectable()
 export class TagsService {
+  /** 城市名称列表 */
   private readonly cities = [
     '阿勒泰地区',
     '玉树藏族自治州',
@@ -80,10 +85,14 @@ export class TagsService {
     '阳江市',
   ];
 
+  /**
+   * 获取标签列表
+   * @returns 100 条随机生成的城市标签数据
+   */
   getTags(): TagsResponseDto {
     const list: TagItemDto[] = [];
 
-    // 生成随机数据
+    // 生成 100 条随机标签数据
     for (let i = 0; i < 100; i++) {
       list.push({
         name: this.cities[Math.floor(Math.random() * this.cities.length)],

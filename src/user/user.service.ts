@@ -1,3 +1,7 @@
+/**
+ * 用户服务
+ * 处理用户信息查询
+ */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -11,6 +15,11 @@ export class UserService {
     private userProfileRepository: Repository<UserProfile>,
   ) {}
 
+  /**
+   * 获取当前登录用户信息
+   * @param userId 用户 ID
+   * @returns 用户详情
+   */
   async getCurrentUser(userId: string): Promise<CurrentUserResponseDto> {
     const profile = await this.userProfileRepository.findOne({
       where: { userId },
@@ -37,7 +46,7 @@ export class UserService {
       };
     }
 
-    // 默认返回空数据
+    // 用户未找到，返回空数据
     return {
       data: {
         name: '',
@@ -47,6 +56,11 @@ export class UserService {
     };
   }
 
+  /**
+   * 根据用户 ID 查询用户详情
+   * @param userId 用户 ID
+   * @returns 用户详情实体
+   */
   async findProfileByUserId(userId: string): Promise<UserProfile | null> {
     return this.userProfileRepository.findOne({ where: { userId } });
   }
