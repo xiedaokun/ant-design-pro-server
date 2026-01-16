@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RuleModule } from './rule/rule.module';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { AnalysisModule } from './analysis/analysis.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     RuleModule,
     AuthModule,
+    UserModule,
+    AnalysisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
