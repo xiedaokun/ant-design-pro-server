@@ -52,6 +52,17 @@ export class OfflineChartDataDto {
   value: number;
 }
 
+export class WorkplaceOfflineChartDataDto {
+  @ApiProperty({ example: 1768552447009 })
+  x: number;
+
+  @ApiProperty({ example: 15 })
+  y1: number;
+
+  @ApiProperty({ example: 96 })
+  y2: number;
+}
+
 export class SalesTypeDataDto {
   @ApiProperty({ example: '家用电器' })
   x: string;
@@ -106,4 +117,41 @@ export class AnalysisChartDataDto {
 export class AnalysisChartResponseDto {
   @ApiProperty({ type: AnalysisChartDataDto })
   data: AnalysisChartDataDto;
+}
+
+export class WorkplaceChartDataDto {
+  @ApiProperty({ type: [VisitDataDto] })
+  visitData: VisitDataDto[];
+
+  @ApiProperty({ type: [VisitDataDto] })
+  visitData2: VisitDataDto[];
+
+  @ApiProperty({ type: [SalesDataDto] })
+  salesData: SalesDataDto[];
+
+  @ApiProperty({ type: [SearchDataDto] })
+  searchData: SearchDataDto[];
+
+  @ApiProperty({ type: [OfflineDataDto] })
+  offlineData: OfflineDataDto[];
+
+  @ApiProperty({ type: [WorkplaceOfflineChartDataDto] })
+  offlineChartData: WorkplaceOfflineChartDataDto[];
+
+  @ApiProperty({ type: [SalesTypeDataDto] })
+  salesTypeData: SalesTypeDataDto[];
+
+  @ApiProperty({ type: [SalesTypeDataDto] })
+  salesTypeDataOnline: SalesTypeDataDto[];
+
+  @ApiProperty({ type: [SalesTypeDataDto] })
+  salesTypeDataOffline: SalesTypeDataDto[];
+
+  @ApiProperty({ type: [RadarDataDto] })
+  radarData: RadarDataDto[];
+}
+
+export class WorkplaceChartResponseDto {
+  @ApiProperty({ type: WorkplaceChartDataDto })
+  data: WorkplaceChartDataDto;
 }
