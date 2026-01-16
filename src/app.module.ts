@@ -6,6 +6,7 @@ import { RuleModule } from './rule/rule.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AnalysisModule } from './analysis/analysis.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AnalysisModule } from './analysis/analysis.module';
     AuthModule,
     UserModule,
     AnalysisModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
