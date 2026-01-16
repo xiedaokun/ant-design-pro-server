@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AnalysisModule } from './analysis/analysis.module';
 import { TagsModule } from './tags/tags.module';
+import { ProjectModule } from './project/project.module';
+import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { TagsModule } from './tags/tags.module';
     UserModule,
     AnalysisModule,
     TagsModule,
+    ProjectModule,
+    ActivityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
