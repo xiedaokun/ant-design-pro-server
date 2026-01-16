@@ -19,7 +19,7 @@ import { RuleService } from './rule.service';
 import { CreateRuleDto } from './dto/create-rule.dto';
 import { UpdateRuleDto } from './dto/update-rule.dto';
 
-@ApiTags('rule')
+@ApiTags('规则管理')
 @Controller('api/rule')
 export class RuleController {
   constructor(private readonly ruleService: RuleService) {}

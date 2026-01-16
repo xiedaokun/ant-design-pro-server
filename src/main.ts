@@ -16,12 +16,11 @@ async function bootstrap() {
     .setTitle('Ant Design Pro API')
     .setDescription('Ant Design Pro 后台管理系统 API 文档')
     .setVersion('1.0')
-    .addTag('rule', '规则管理')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  const port = process.env.PORT ?? 3001;
+  const port = process.env.PORT ?? 8888;
   await app.listen(port);
   console.log(`🚀 Server is running on: http://localhost:${port}`);
   console.log(`📚 Swagger API docs: http://localhost:${port}/api-docs`);

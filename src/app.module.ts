@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RuleModule } from './rule/rule.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { RuleModule } from './rule/rule.module';
       synchronize: false, // 生产环境设为 false
     }),
     RuleModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
