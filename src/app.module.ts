@@ -3,6 +3,7 @@
  * 配置数据库连接和导入所有功能模块
  */
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -14,6 +15,7 @@ import { AnalysisModule } from './analysis/analysis.module';
 import { TagsModule } from './tags/tags.module';
 import { ProjectModule } from './project/project.module';
 import { ActivityModule } from './activity/activity.module';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -61,6 +63,13 @@ import { ActivityModule } from './activity/activity.module';
     ActivityModule, // 活动动态模块
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // 全局 JWT 认证守卫，所有路由默认需要 token（除 @Public() 装饰的路由）
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}

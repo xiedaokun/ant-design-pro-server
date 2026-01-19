@@ -6,9 +6,11 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto, LoginResponseDto } from './dto/login.dto';
+import { Public } from './public.decorator';
 
 @ApiTags('认证管理')
 @Controller('api/login')
+@Public() // 登录相关接口无需 token 认证
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
